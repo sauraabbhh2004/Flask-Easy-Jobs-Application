@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author.username }}</a>
+              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            <small class="article-content">Apply at <a href="mailto:{{ post.author.email }}?subject=Job%20Application%20For%20'{{ post.title }}'&body=%3C%3CPlease%20provide%20personal%20info%20%26%20attach%20required%20documents%3E%3E%0D%0A%0D%0A%3C%3CName%2C%20Email%2C%20Phone%2C%20Address%3E%3E%0D%0A%0D%0AAvailability%3A%0D%0AFull-time%0D%0APart-time%0D%0AContract%0D%0AInternship%0D%0A%0D%0AEducation%3A%0D%0A%3C%3CDegree%2C%20Institution%2C%20Major%3E%3E%0D%0A%0D%0AWork%20Experience%3A%0D%0A%3C%3CCompany%2C%20Position%2C%20Duration%3E%3E%0D%0A%0D%0ASkills%3A%0D%0A%3C%3CRelevant%20Skills%3E%3E%0D%0A%0D%0AAttach%20Documents%3A%0D%0A%3C%3CResume%2FCV%2C%20Cover%20Letter%20(if%20applicable)%2C%20Certificates%20(if%20applicable)%3E%3E">{{ post.author.email }}</a></small>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
